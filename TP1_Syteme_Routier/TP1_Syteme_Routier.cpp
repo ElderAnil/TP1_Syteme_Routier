@@ -18,6 +18,9 @@ int main()
     //Vehicle v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36, v37, v38, v39, v40;
 
 
+    //Vehicle v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36, v37, v38, v39, v40;
+
+
 
     v1.InitVehicle("V001", "Voiture", 0, "Nord");
     v2.InitVehicle("V002", "Camion", 0, "Nord");
