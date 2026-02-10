@@ -29,6 +29,7 @@
     <ClCompile Include="Intersection.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="TP1_Syteme_Routier.cpp" />
+    <ClCompile Include="TrafficSystem.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="VehicleQueue.cpp" />
   </ItemGroup>

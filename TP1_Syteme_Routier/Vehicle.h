@@ -8,14 +8,16 @@ class Vehicle
 private:
     std::string id;
     std::string type;
-    int waitTime;
+    
     std::string destination;
 
 public:
     Vehicle();
-    Vehicle(std::string, std::string, int, std::string);
-    void IncreaseWaitTime(int);
+    Vehicle(std::string, std::string, std::string);
+    void IncreaseWaitTime();
     void Display() const;
+
+    int waitTime;
 
 };
 

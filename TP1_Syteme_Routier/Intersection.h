@@ -5,13 +5,8 @@
 #include <iostream>
 #include "Road.h"
 
-enum class TrafficLightState {
-	RED, GREEN, YELLOW ///Optionnel ?? 
-};
-
-enum class IntersectionType {
-	PRIORITY_LIGHT, FIXED_LIGHT, FOUR_WAY_STOP
-};
+enum class TrafficLightState {RED, GREEN, YELLOW};
+enum class IntersectionType {PRIORITY_LIGHT, FIXED_LIGHT, FOUR_WAY_STOP};
 
 class Intersection {
 private:
@@ -31,10 +26,12 @@ private:
 	int maxGreenDuration;
 
 public:
+	Intersection(std::string, IntersectionType, int, int);
 	void processTurn();
 	void updateLight();
 	void display();
  
+
 };
 
 #endif // !"ClassIntersection_H"

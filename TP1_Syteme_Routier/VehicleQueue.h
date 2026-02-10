@@ -19,7 +19,7 @@ public:
 	VehicleQueue(); 
 	void enqueueVehicle(Vehicle&);
 	Vehicle dequeueVehicle();
-	void peekVehicle();
+	Vehicle& peekVehicle();
 	bool isEmpty() const;
 	int getNumberVehicle() const;
 	void displayVehicle();

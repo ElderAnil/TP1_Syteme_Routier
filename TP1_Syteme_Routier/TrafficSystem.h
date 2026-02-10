@@ -1,23 +1,21 @@
 #include "Intersection.h"
 #ifndef TrafficSystem_h
-#define TracfficSystem_h
+#define TrafficSystem_h
 
 #include <vector>
-class TracficSystem {
+class TrafficSystem {
 
 private:
-	std::vector<Intersection>* list;
+	std::vector<Intersection*> intersections;
 	int totalWaitTime;
 	int processedVehicles;
 
 public:
-	/*void addIntersection(Intersection* intersection);
+	void addIntersection(Intersection* intersection);
 	void processTurn();
 	void displayState();
 	int getTotalWaitTime();
-	int getProcessedVehicles();*/
-
-	 
+	int getProcessedVehicles();
 };
 
-#endif // !ClassTraficSystem.h
+#endif

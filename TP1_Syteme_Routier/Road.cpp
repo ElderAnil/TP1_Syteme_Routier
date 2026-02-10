@@ -2,8 +2,8 @@
 #include <iostream>
 Road::Road(std::string n, std::string d) {
 	name = n;
-	VehicleQueue file = VehicleQueue();
 	direction = d;
+	VehicleQueue file = VehicleQueue();
 }
 
 void Road::addVehicle(Vehicle& v){
@@ -11,7 +11,7 @@ void Road::addVehicle(Vehicle& v){
 }
 
 Vehicle* Road::getNextVehicle() {
-	return &this->file.dequeueVehicle();
+	return &file.peekVehicle();
 }
 
 void Road::increaseAllWaitTimes() {
@@ -20,7 +20,7 @@ void Road::increaseAllWaitTimes() {
 
 void Road::displayRoad() {
 	std::cout << "Road name : " << name << std::endl;
-	std::cout << "Direction : " << name << std::endl;
+	std::cout << "Direction : " << direction << std::endl;
 	std::cout << "Numbre of vehicles remaining : " << getVehicleCount() << std::endl;
 }
 

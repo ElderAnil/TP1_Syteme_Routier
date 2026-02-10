@@ -9,8 +9,8 @@
 class Road {
 private:
 	std::string name;
-	VehicleQueue file;
 	std::string direction;
+	VehicleQueue file;
 
 public:
 	Road(std::string, std::string);

@@ -27,15 +27,15 @@ Vehicle VehicleQueue::dequeueVehicle() {
 	
 	Vehicle temp;
 	temp = arrVehicle[frontIndex];
-
+	
 	frontIndex = (frontIndex + 1) % Max_Vehicul_Per_Road;
 	size--;
 	
 	return temp; 
 }
 
-void VehicleQueue::peekVehicle() {
-	arrVehicle[frontIndex].Display();
+Vehicle& VehicleQueue::peekVehicle() {
+	return arrVehicle[frontIndex];
 }
 
 bool VehicleQueue::isEmpty() const {
@@ -49,6 +49,6 @@ int VehicleQueue::getNumberVehicle() const {
 void VehicleQueue::displayVehicle() {
 	for (int i = 0; i <= size; i++) {
 		arrVehicle[i].Display(); 
-		arrVehicle[i].IncreaseWaitTime(1); //à verifier et changer 
+		arrVehicle[i].IncreaseWaitTime();
 	}
 }
