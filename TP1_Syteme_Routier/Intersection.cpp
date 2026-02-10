@@ -16,9 +16,9 @@ Intersection::Intersection(std::string name, IntersectionType intersectionType, 
 	TrafficLightState eastWestLight = TrafficLightState::RED;
 }
 
-void Intersection::processTurn() {
-	updateLight();
-}
+//void Intersection::processTurn() {
+//	updateLight();
+//}
 
 void Intersection::updateLight() {
 	cycleCounter++;
