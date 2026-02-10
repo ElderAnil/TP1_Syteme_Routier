@@ -12,7 +12,8 @@ private:
     std::string destination;
 
 public:
-    void InitVehicle(std::string, std::string, int, std::string);
+    Vehicle();
+    Vehicle(std::string, std::string, int, std::string);
     void IncreaseWaitTime(int);
     void Display() const;
 

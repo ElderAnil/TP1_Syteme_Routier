@@ -14,11 +14,11 @@ private:
 
 public:
 	Road(std::string, std::string);
-	void addVehicle(Vehicle);
-	Vehicle* popNextVehicle();
+	void addVehicle(Vehicle&);
+	Vehicle* getNextVehicle();
 	void increaseAllWaitTimes();
 	void displayRoad();
-	int getVehicleCountInRoad();
+	int getVehicleCount();
 };
 
  

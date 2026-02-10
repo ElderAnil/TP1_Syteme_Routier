@@ -48,7 +48,7 @@ int VehicleQueue::getNumberVehicle() const {
 
 void VehicleQueue::displayVehicle() {
 	for (int i = 0; i <= size; i++) {
-		arrVehicle[i].Display(); //à verifier; 
+		arrVehicle[i].Display(); 
 		arrVehicle[i].IncreaseWaitTime(1); //à verifier et changer 
 	}
 }
