@@ -16,9 +16,23 @@ Intersection::Intersection(std::string name, IntersectionType intersectionType, 
 	TrafficLightState eastWestLight = TrafficLightState::RED;
 }
 
-//void Intersection::processTurn() {
-//	updateLight();
-//}
+void Intersection::processTurn() {
+	updateLight();
+
+	if (northSouthLight == TrafficLightState::GREEN) {
+		northRoad->getNextVehicle();
+		southRoad->getNextVehicle();
+		eastRoad->increaseAllWaitTimes();
+		westRoad->increaseAllWaitTimes();
+	}
+	else
+	{
+		northRoad->increaseAllWaitTimes();
+		southRoad->increaseAllWaitTimes();
+		eastRoad->getNextVehicle();
+		westRoad->getNextVehicle();
+	}
+}
 
 void Intersection::updateLight() {
 	cycleCounter++;
