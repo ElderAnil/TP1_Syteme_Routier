@@ -6,7 +6,9 @@ void TrafficSystem::addIntersection(Intersection* i) {
 
 void TrafficSystem::processTurn() {
 	for (Intersection* inter : intersections) {
-		inter->processTurn();
+		totalWaitTime +=
+		/*inter->processTurn();*/
+
 	}
 }
 
@@ -17,12 +19,10 @@ void TrafficSystem::displayState() {
 }
 
 int TrafficSystem::getTotalWaitTime() {
-	int total;
-	
-	/*for (Intersection* inter : intersections) {
-		inter.
-	
-	}*/
-	return total;
+	return totalWaitTime;
 }
+
+int TrafficSystem::getProcessedVehicles() {
+	return processedVehicles;
+};
 

@@ -1,6 +1,7 @@
 #include "Intersection.h"
 
 Intersection::Intersection(std::string name, IntersectionType intersectionType, int greenDuration, int maxGreenDuration) {
+
 	this->name = name;
 	this->type = intersectionType;
 	this->greenDuration = greenDuration;
@@ -11,13 +12,10 @@ Intersection::Intersection(std::string name, IntersectionType intersectionType, 
 	southRoad = new Road("S", "South");
 	eastRoad = new Road("E", "East");
 	westRoad = new Road("W", "West");
-
 }
 
 void Intersection::processTurn() {
 	updateLight();
-	
-	int cpt = 0;
 
 	do{
 		if (northSouthLight == TrafficLightState::GREEN) {
@@ -40,8 +38,8 @@ void Intersection::processTurn() {
 			greenDuration--;
 		}
 		else if (type == IntersectionType::FOUR_WAY_STOP) {
-			Road* roads[4] = { northRoad, southRoad, eastRoad, westRoad };
-			Road* longestWaiting = roads[0];
+			
+			Road* longestWaiting = northRoad;
 
 			for (int i = 0; i < 4; i++) {
 				if (southRoad->getNextVehicle()->waitTime > longestWaiting->getNextVehicle()->waitTime)
@@ -53,12 +51,20 @@ void Intersection::processTurn() {
 
 				longestWaiting->getNextVehicle();
 
+				if (northRoad != longestWaiting)
+					northRoad->increaseAllWaitTimes();
+				if(southRoad != longestWaiting)
+					southRoad->increaseAllWaitTimes();
+				if(eastRoad != longestWaiting)
+					eastRoad->increaseAllWaitTimes();
+				if(westRoad != longestWaiting)
+					westRoad->increaseAllWaitTimes();
 			}
 		}
 
-		cpt++;
+		cycleCounter++;
 
-	} while (!(greenDuration == cpt));
+	} while (!(greenDuration == cycleCounter));
 }
 
 void Intersection::updateLight() {
@@ -79,6 +85,7 @@ void Intersection::updateLight() {
 
 		greenDuration = 2;
 		maxGreenDuration = 5;
+		cycleCounter = 0;
 	}
 	
 	if(type == IntersectionType::FIXED_LIGHT) {
@@ -95,25 +102,12 @@ void Intersection::updateLight() {
 			eastWestLight = TrafficLightState::GREEN;
 
 			greenDuration = 3;
+			cycleCounter = 0;
 	}
 
 	if(type == IntersectionType::FOUR_WAY_STOP) {
-			
-			int n = northRoad->getNextVehicle()->waitTime;
-			int s = southRoad->getNextVehicle()->waitTime;
-			int e = eastRoad->getNextVehicle()->waitTime;
-			int w = westRoad->getNextVehicle()->waitTime;
-			
-			if ((n + s) > (e + w) ){
-				eastWestLight = TrafficLightState::RED;
-				northSouthLight = TrafficLightState::GREEN;
-			}
-			else {
-				eastWestLight = TrafficLightState::GREEN;
-				northSouthLight = TrafficLightState::RED;
-			}
-
 		greenDuration = 1;
+		cycleCounter = 0;
 	}
 }
 
