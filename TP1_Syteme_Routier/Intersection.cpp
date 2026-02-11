@@ -25,7 +25,7 @@ void Intersection::processTurn() {
 			westRoad->increaseAllWaitTimes();
 			northRoad->increaseAllWaitTimes();
 			southRoad->increaseAllWaitTimes();
-			greenDuration--;
+			cycleCounter++;
 		}
 		else if(eastWestLight == TrafficLightState::GREEN)
 		{
@@ -35,7 +35,7 @@ void Intersection::processTurn() {
 			westRoad->increaseAllWaitTimes();
 			northRoad->increaseAllWaitTimes();
 			southRoad->increaseAllWaitTimes();
-			greenDuration--;
+			cycleCounter++;
 		}
 		else if (type == IntersectionType::FOUR_WAY_STOP) {
 			
@@ -60,9 +60,8 @@ void Intersection::processTurn() {
 				if(westRoad != longestWaiting)
 					westRoad->increaseAllWaitTimes();
 			}
+			cycleCounter++;
 		}
-
-		cycleCounter++;
 
 	} while (!(greenDuration == cycleCounter));
 }
