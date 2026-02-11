@@ -12,26 +12,53 @@ Intersection::Intersection(std::string name, IntersectionType intersectionType, 
 	eastRoad = new Road("E", "East");
 	westRoad = new Road("W", "West");
 
-	TrafficLightState northSouthLight = TrafficLightState::RED;
-	TrafficLightState eastWestLight = TrafficLightState::RED;
 }
 
 void Intersection::processTurn() {
 	updateLight();
+	
+	int cpt = 0;
 
-	if (northSouthLight == TrafficLightState::GREEN) {
-		northRoad->getNextVehicle();
-		southRoad->getNextVehicle();
-		eastRoad->increaseAllWaitTimes();
-		westRoad->increaseAllWaitTimes();
-	}
-	else
-	{
-		northRoad->increaseAllWaitTimes();
-		southRoad->increaseAllWaitTimes();
-		eastRoad->getNextVehicle();
-		westRoad->getNextVehicle();
-	}
+	do{
+		if (northSouthLight == TrafficLightState::GREEN) {
+			northRoad->getNextVehicle();
+			southRoad->getNextVehicle();
+			eastRoad->increaseAllWaitTimes();
+			westRoad->increaseAllWaitTimes();
+			northRoad->increaseAllWaitTimes();
+			southRoad->increaseAllWaitTimes();
+			greenDuration--;
+		}
+		else if(eastWestLight == TrafficLightState::GREEN)
+		{
+			eastRoad->getNextVehicle();
+			westRoad->getNextVehicle();
+			eastRoad->increaseAllWaitTimes();
+			westRoad->increaseAllWaitTimes();
+			northRoad->increaseAllWaitTimes();
+			southRoad->increaseAllWaitTimes();
+			greenDuration--;
+		}
+		else if (type == IntersectionType::FOUR_WAY_STOP) {
+			Road* roads[4] = { northRoad, southRoad, eastRoad, westRoad };
+			Road* longestWaiting = roads[0];
+
+			for (int i = 0; i < 4; i++) {
+				if (southRoad->getNextVehicle()->waitTime > longestWaiting->getNextVehicle()->waitTime)
+					longestWaiting = southRoad;
+				if (eastRoad->getNextVehicle()->waitTime > longestWaiting->getNextVehicle()->waitTime)
+					longestWaiting = eastRoad;
+				if (westRoad->getNextVehicle()->waitTime > longestWaiting->getNextVehicle()->waitTime)
+					longestWaiting = westRoad;
+
+				longestWaiting->getNextVehicle();
+
+			}
+		}
+
+		cpt++;
+
+	} while (!(greenDuration == cpt));
 }
 
 void Intersection::updateLight() {
@@ -68,7 +95,6 @@ void Intersection::updateLight() {
 			eastWestLight = TrafficLightState::GREEN;
 
 			greenDuration = 3;
-			maxGreenDuration = 3;
 	}
 
 	if(type == IntersectionType::FOUR_WAY_STOP) {
@@ -88,7 +114,6 @@ void Intersection::updateLight() {
 			}
 
 		greenDuration = 1;
-		maxGreenDuration = 1;
 	}
 }
 
