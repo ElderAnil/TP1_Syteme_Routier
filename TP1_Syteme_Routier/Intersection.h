@@ -27,7 +27,7 @@ private:
 
 public:
 	Intersection(std::string, IntersectionType, int, int);
-	void processTurn();
+	int processTurn();
 	void updateLight();
 	void display();
  

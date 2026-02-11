@@ -14,7 +14,9 @@ Intersection::Intersection(std::string name, IntersectionType intersectionType, 
 	westRoad = new Road("W", "West");
 }
 
-void Intersection::processTurn() {
+int Intersection::processTurn() {
+	int passedVehicle;
+	
 	updateLight();
 
 	do{
@@ -64,6 +66,8 @@ void Intersection::processTurn() {
 		}
 
 	} while (!(greenDuration == cycleCounter));
+
+	return passedVehicle;
 }
 
 void Intersection::updateLight() {
@@ -105,6 +109,8 @@ void Intersection::updateLight() {
 	}
 
 	if(type == IntersectionType::FOUR_WAY_STOP) {
+		eastWestLight = TrafficLightState::RED;
+		northSouthLight = TrafficLightState::RED;
 		greenDuration = 1;
 		cycleCounter = 0;
 	}
